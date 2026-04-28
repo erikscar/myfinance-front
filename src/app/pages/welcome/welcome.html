@@ -3,11 +3,21 @@
         <h1>MyFinance</h1>
         <p>A melhor forma de cuidar do seu dinheiro</p>
     </div>
-    <img [src]="'assets/' + homepageImagePath + '.png'" class="chart-icon">
+    <div class="carrousel-wrapper">
+        <div class="carrousel" (scroll)="onCarrouselScroll($event)">
+            @for (item of items; let idx = $index; track $index) {
+                <img 
+                    [src]="item.path" 
+                    [alt]="item.alt" 
+                    class="carrousel-image"
+                    [id]="'carrousel-image' + (idx + 1)">
+            }
+        </div> 
+    </div>
     <div class="dot-carrousel-buttons-container">
-        <button></button>
-        <button></button>
-        <button></button>
+        <a href="#carrousel-image1" [class.active]="activeIndex == 1"></a>
+        <a href="#carrousel-image2" [class.active]="activeIndex == 2"></a>
+        <a href="#carrousel-image3" [class.active]="activeIndex == 3"></a>
     </div>
     <div class="access-buttons-container">
         <button>Acessar sua conta</button>

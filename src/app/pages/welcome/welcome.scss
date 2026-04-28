@@ -23,10 +23,25 @@
         }
     }
 
-    .chart-icon {
-        width: 20rem;
-        height: 20rem;
-        margin: 1rem auto 0 auto;
+    .carrousel-wrapper {
+        overflow: hidden;
+
+        .carrousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            height: 20rem;
+            width: 20rem;
+            transition: transform 0.3s ease;
+            scroll-snap-type: y mandatory;
+
+            .carrousel-image {
+                width: 20rem;
+                height: 20rem;
+                scroll-snap-align: start;
+            }
+        }
     }
 
     .dot-carrousel-buttons-container {
@@ -35,7 +50,7 @@
         align-items: center;
         gap: .5rem;
 
-        button {
+        a {
             width: .5rem;
             height: .5rem;
             border-radius: 100%;
@@ -43,6 +58,12 @@
             border: 0;
             margin: 1rem 0;
             cursor: pointer;
+            transition: .25s width ease;
+
+            &.active {
+                width: 1rem;
+                border-radius: .75rem;
+            }
         }
     }
     .access-buttons-container {
@@ -64,7 +85,7 @@
             transition: 1s;
 
             &:hover {
-                opacity: 0.8;
+                background-color: rgba(242, 233, 216, 0.8);
                 transform: scale(1.01);
             }
         }
