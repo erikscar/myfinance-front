@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">myfinance-front</string>
+    <string name="title_activity_main">myfinance-front</string>
+    <string name="package_name">myfinance.front</string>
+    <string name="custom_url_scheme">myfinance.front</string>
+</resources>

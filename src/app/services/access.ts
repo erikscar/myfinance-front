@@ -9,9 +9,22 @@ import { firstValueFrom } from 'rxjs';
 export class Access {
   private http: HttpClient = inject(HttpClient);
 
-    loginUser(userData: any) {
-    const url = "http://localhost:5151/User/login";
-    
-    return firstValueFrom(this.http.post(url, {email: userData.email, password: userData.password}));
-  }
+  url: string = "http://localhost:5151/User/";
+
+    loginUser(userData: any): any {
+      return firstValueFrom(this.http.post(this.url + "login", {
+        email: userData.email, 
+        password: userData.password
+      }));
+    };
+
+    registerUser(userData: any) {
+      
+      return firstValueFrom(this.http.post(this.url + "register", { 
+            name: userData.name,
+            email: userData.email,
+            password: userData.password,
+            confirmPassword: userData.confirmPassword
+       }))
+    };
 }

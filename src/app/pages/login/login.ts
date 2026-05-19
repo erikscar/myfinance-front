@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Access } from '../../services/access';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,8 @@ import { Access } from '../../services/access';
 })
 
 export class Login {
-  accessService = inject(Access);
+  accessService: Access = inject(Access);
+  router: Router = inject(Router);
 
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(""),
@@ -18,7 +20,12 @@ export class Login {
   })
 
    async loginUser() {
-    var res =  await this.accessService.loginUser(this.loginForm.value)
-    console.log(res);
+    var res = await this.accessService.loginUser(this.loginForm.value)
+
+    localStorage.setItem("jwt", res.token);
+    
+    this.loginForm.reset;
+
+    this.router.navigateByUrl("/home");
   }
 }

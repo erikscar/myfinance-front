@@ -74,16 +74,20 @@
         gap: .75rem;
         margin-top: 1.5rem;
 
-        button {
+        a {
             width: 100%;
             padding: .75rem;
             border-radius: 1rem;
+            text-decoration: none;
             border: 0;
             background-color: $primary-color;
             font-weight: 600;
             cursor: pointer;
             transition: 1s;
-
+            color: $secondary-color;
+            text-align: center;
+            font-size: 14px;
+            
             &:hover {
                 background-color: rgba(242, 233, 216, 0.8);
                 transform: scale(1.01);
