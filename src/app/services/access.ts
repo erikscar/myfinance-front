@@ -15,7 +15,11 @@ export class Access {
       return firstValueFrom(this.http.post(this.url + "login", {
         email: userData.email, 
         password: userData.password
-      }));
+      },
+      { withCredentials : true }
+    ));
+
+
     };
 
     registerUser(userData: any) {
@@ -27,4 +31,9 @@ export class Access {
             confirmPassword: userData.confirmPassword
        }))
     };
+
+    getUsers() {
+      return firstValueFrom(this.http.get(this.url + "users", { withCredentials: true }))
+    }
+
 }

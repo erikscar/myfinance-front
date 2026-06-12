@@ -1,15 +1,55 @@
 
-
+<div class="login-container">
+    <a routerLink="/">
+        <ion-icon name="arrow-back-circle-outline" class="goback-icon"></ion-icon>    
+    </a>
 <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginUser()">
-    <h1>MyFinance</h1>
-    <div class="input-group">
-        <label for="email">Email</label>
-        <input type="text" name="email" placeholder="Email..." formControlName="email">
-    </div>
-    <div class="input-group">
-        <label for="password">Senha</label>
-        <input type="password" name="password" placeholder="Senha..." formControlName="password">
+    <div class="title-wrapper">
+        <h1>MyFinance</h1>
+        <p>A melhor forma de cuidar do seu dinheiro</p>
     </div>
 
-    <button type="submit" class="login-btn">Entrar</button>
+    <div class="icon-image">
+        <img src="assets/pig-icon.png" class="icon-image">
+    </div>
+
+    <div class="input-container">
+        <div class="input-group">
+            <ion-icon name="person-outline"></ion-icon>
+            <input type="text" name="email" placeholder="Email" formControlName="email">
+    
+            @if(loginForm.get("email")?.hasError("email") && loginForm.get("email")?.dirty) {
+                <ion-icon name="alert-circle"></ion-icon>
+            }
+        </div>
+    
+        @if(loginForm.get("email")?.hasError("email") && loginForm.get("email")?.dirty) {
+            <span class="input-error-message">Por Favor, insira um email válido</span>
+        }
+    
+        <div class="input-group">
+            <ion-icon name="key-outline"></ion-icon>
+            <input [type]="showPassword ? 'text' : 'password'" name="password" placeholder="Senha" formControlName="password">
+            <ion-icon  [name]="showPassword ? 'eye-outline' : 'eye-off-outline'" (click)="changePasswordDisplay()"></ion-icon>
+        </div>
+    </div>
+
+    <a href="" class="forgot-password-btn">Esqueceu sua senha?</a>
+    <button type="submit" class="login-btn">ENTRAR</button>
+
+    <div class="or-separator-container">
+        <div class="or-separator"></div>
+        <p>Ou continue com</p>
+        <div class="or-separator"></div>
+    </div>
+
+    <div class="alternative-login-btn-container">
+        <button>
+            <ion-icon name="logo-google"></ion-icon>
+        </button>
+        <button>
+            <ion-icon name="logo-microsoft"></ion-icon>
+        </button>
+    </div>
 </form>
+</div>

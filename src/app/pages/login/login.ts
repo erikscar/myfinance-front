@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Access } from '../../services/access';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { IonIcon } from "@ionic/angular/standalone";
 
 @Component({
-  selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  selector: 'app-login',  
+  imports: [IonIcon, ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -13,19 +14,26 @@ import { Router } from '@angular/router';
 export class Login {
   accessService: Access = inject(Access);
   router: Router = inject(Router);
-
+  showPassword: boolean = false;
+  passwordIcon: string = "eye-off-outline";
+  
   loginForm: FormGroup = new FormGroup({
-    email: new FormControl(""),
-    password: new FormControl("")
-  })
+    email: new FormControl("", Validators.email),
+    password: new FormControl(""),
+  });
 
-   async loginUser() {
-    var res = await this.accessService.loginUser(this.loginForm.value)
 
-    localStorage.setItem("jwt", res.token);
-    
+  async loginUser() {
+    await this.accessService.loginUser(this.loginForm.value)
+
     this.loginForm.reset;
 
+    this.loginForm.hasError
+
     this.router.navigateByUrl("/home");
+  }
+
+  changePasswordDisplay() {
+    this.showPassword = !this.showPassword;
   }
 }

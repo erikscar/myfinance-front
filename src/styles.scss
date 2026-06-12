@@ -1,6 +1,14 @@
+@import 'ngx-toastr/toastr';
+@import url("https://cdn.jsdelivr.net/gh/devchauhann/fonts@v1.1.0/cdn/v1/css/all.css");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: "Anthropic Sans", sans-serif;
+}
+
+a {
+    text-decoration: none;
 }
