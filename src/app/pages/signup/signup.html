@@ -1,27 +1,80 @@
-<div class="signup-container">
-    <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
-        <a routerLink="">Voltar</a>
-    
-        <div class="input-group">
-            <label for="">Nome</label>
-            <input type="text" formControlName="name">
+<div class="login-container">
+    <a routerLink="/">
+        <ion-icon name="arrow-back-circle-outline" class="goback-icon"></ion-icon>
+    </a>
+    <form class="login-form" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+        <div class="title-wrapper">
+            <h1>MyFinance</h1>
+            <p>A melhor forma de cuidar do seu dinheiro</p>
         </div>
-    
-        <div class="input-group">
-            <label for="">Email</label>
-            <input type="text" formControlName="email">
+
+        <div class="icon-image">
+            <img src="assets/chart-icon.png" class="icon-image" alt="chart-icon">
         </div>
+
+        <div class="input-container">
+            <div class="fullname-input-wrapper">
+                <div class="input-group-wrapper">
+                    <div class="input-group">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <input type="text" name="firstName" placeholder="Nome" formControlName="firstName">
+                    </div>
+                </div>
     
-        <div class="input-group">
-            <label for="">Senha</label>
-            <input type="text" formControlName="password">
+                <div class="input-group-wrapper">
+                    <div class="input-group">
+                        <input type="text" name="lastName" placeholder="Sobrenome" formControlName="lastName">
+                    </div>
+                </div>  
+            </div>
+
+            <div class="input-group-wrapper">
+                <div class="input-group">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <input type="text" name="email" placeholder="Email" formControlName="email">
+                    @if(registerForm.get("email")?.hasError("email") && registerForm.get("email")?.dirty) {
+                        <ion-icon name="alert-circle"></ion-icon>
+                    } 
+                </div>
+
+                @if(registerForm.get("email")?.hasError("email") && registerForm.get("email")?.dirty) {
+                <span class="input-error-message">Por Favor, insira um email válido</span>
+                }
+            </div>
+
+            <div class="input-group-wrapper">
+                <div class="input-group">
+                    <ion-icon name="key-outline"></ion-icon>
+                    <input [type]="showPassword ? 'text' : 'password'" name="password" placeholder="Senha"
+                        formControlName="password">
+                    <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+                        (click)="changePasswordDisplay()"></ion-icon>
+                </div>
+            </div>
+
+            <div class="input-group-wrapper">
+                <div class="input-group">
+                    <ion-icon name="key-outline"></ion-icon>
+                    <input [type]="showPassword ? 'text' : 'password'" name="confirmPassword" placeholder="Confirme sua senha"
+                        formControlName="confirmPassword">
+                    <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+                        (click)="changePasswordDisplay()"></ion-icon>
+                </div>
+
+                 @if(registerForm.get("confirmPassword")?.hasError("passwordMismatch") && registerForm.get("confirmPassword")?.dirty) {
+                <span class="input-error-message">As Senhas não conferem</span>
+                }
+
+                @if(registerForm.get("password")?.value && registerForm.get("password")?.dirty) {
+                <div class="password-strength-bar">
+                    <div class="password-strength-line" [style.width.%]="passwordStrength * 20"
+                        [style.background-color]="passwordStrengthColor"></div>
+                </div>
+                }
+            </div>
         </div>
-    
-        <div class="input-group">
-            <label for="">Confirm Password</label>
-            <input type="text" formControlName="confirmPassword">
-        </div>
-    
-        <button type="submit">Sign Up</button>
+
+        <a href="" class="forgot-password-btn">Esqueceu sua senha?</a>
+        <button type="submit" class="login-btn" [disabled]="!registerForm.valid">ENTRAR</button>
     </form>
 </div>

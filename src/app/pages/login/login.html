@@ -1,55 +1,70 @@
-
 <div class="login-container">
     <a routerLink="/">
-        <ion-icon name="arrow-back-circle-outline" class="goback-icon"></ion-icon>    
+        <ion-icon name="arrow-back-circle-outline" class="goback-icon"></ion-icon>
     </a>
-<form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginUser()">
-    <div class="title-wrapper">
-        <h1>MyFinance</h1>
-        <p>A melhor forma de cuidar do seu dinheiro</p>
-    </div>
-
-    <div class="icon-image">
-        <img src="assets/pig-icon.png" class="icon-image">
-    </div>
-
-    <div class="input-container">
-        <div class="input-group">
-            <ion-icon name="person-outline"></ion-icon>
-            <input type="text" name="email" placeholder="Email" formControlName="email">
-    
-            @if(loginForm.get("email")?.hasError("email") && loginForm.get("email")?.dirty) {
-                <ion-icon name="alert-circle"></ion-icon>
-            }
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+        <div class="title-wrapper">
+            <h1>MyFinance</h1>
+            <p>A melhor forma de cuidar do seu dinheiro</p>
         </div>
-    
-        @if(loginForm.get("email")?.hasError("email") && loginForm.get("email")?.dirty) {
-            <span class="input-error-message">Por Favor, insira um email válido</span>
-        }
-    
-        <div class="input-group">
-            <ion-icon name="key-outline"></ion-icon>
-            <input [type]="showPassword ? 'text' : 'password'" name="password" placeholder="Senha" formControlName="password">
-            <ion-icon  [name]="showPassword ? 'eye-outline' : 'eye-off-outline'" (click)="changePasswordDisplay()"></ion-icon>
+
+        <div class="icon-image">
+            <img src="assets/pig-icon.png" class="icon-image" alt="pig-icon">
         </div>
-    </div>
 
-    <a href="" class="forgot-password-btn">Esqueceu sua senha?</a>
-    <button type="submit" class="login-btn">ENTRAR</button>
+        <div class="input-container">
+            <div class="input-group-wrapper">
+                <div class="input-group">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <input type="text" name="email" placeholder="Email" formControlName="email">
+                    @if(loginForm.get("email")?.hasError("email") && loginForm.get("email")?.dirty) {
+                    <ion-icon name="alert-circle"></ion-icon>
+                    }
+                </div>
 
-    <div class="or-separator-container">
-        <div class="or-separator"></div>
-        <p>Ou continue com</p>
-        <div class="or-separator"></div>
-    </div>
+                @if(loginForm.get("email")?.hasError("email") && loginForm.get("email")?.dirty) {
+                <span class="input-error-message">Por Favor, insira um email válido</span>
+                }
+            </div>
 
-    <div class="alternative-login-btn-container">
-        <button>
-            <ion-icon name="logo-google"></ion-icon>
-        </button>
-        <button>
-            <ion-icon name="logo-microsoft"></ion-icon>
-        </button>
-    </div>
-</form>
+
+            <div class="input-group-wrapper">
+                <div class="input-group">
+                    <ion-icon name="key-outline"></ion-icon>
+                    <input [type]="showPassword ? 'text' : 'password'" name="password" placeholder="Senha"
+                        formControlName="password">
+                    <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+                        (click)="changePasswordDisplay()"></ion-icon>
+                </div>
+                
+                @if(loginForm.get("password")?.value &&  loginForm.get("password")?.dirty) {
+                    <div class="password-strength-bar">
+                        <div class="password-strength-line" [style.width.%]="passwordStrength * 20" [style.background-color]="passwordStrengthColor"></div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <a href="" class="forgot-password-btn">Esqueceu sua senha?</a>
+        <button type="submit" class="login-btn" [disabled]="!loginForm.valid">ENTRAR</button>
+
+        <!-- <div class="or-separator-container">
+            <div class="or-separator"></div>
+            <p>ou</p>
+            <div class="or-separator"></div>
+        </div> -->
+
+        <!-- <div class="alternative-login-btn-container">
+            <div id="g_id_onload" data-client_id="411251684984-mn384gvej79ofi631hue538a40709cl3.apps.googleusercontent.com"
+                data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:5151/User/google"
+                data-auto_prompt="false">
+            </div>
+        
+            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signin_with"
+                data-size="large" data-logo_alignment="center" data-width="270">
+            </div>
+        </div> -->
+
+
+    </form>
 </div>
