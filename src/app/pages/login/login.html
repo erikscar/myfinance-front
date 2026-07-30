@@ -36,12 +36,7 @@
                     <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
                         (click)="changePasswordDisplay()"></ion-icon>
                 </div>
-                
-                @if(loginForm.get("password")?.value &&  loginForm.get("password")?.dirty) {
-                    <div class="password-strength-bar">
-                        <div class="password-strength-line" [style.width.%]="passwordStrength * 20" [style.background-color]="passwordStrengthColor"></div>
-                    </div>
-                }
+            
             </div>
         </div>
 

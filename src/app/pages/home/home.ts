@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@ang
 import { Access } from '../../services/access';
 import { AsyncPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../../services/user';
 
 @Component({
   selector: 'app-home',
@@ -10,22 +11,16 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './home.scss',
 })
 export class Home implements OnInit {
-  public readonly accessService = inject(Access);
+  public readonly userService = inject(User);
   toastr: ToastrService = inject(ToastrService);
 
   users = signal<any>([]);
 
   ngOnInit() {
     this.getUsers();
-    console.log(document.cookie);
-    
   }
 
   async getUsers() {
-    this.users.set(await this.accessService.getUsers());
-  }
-
-  toast() {
-    this.toastr.success("TESTANDO O TESTE NO TOAST");
+    this.users.set(await this.userService.getUsers());
   }
 }
