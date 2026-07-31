@@ -6,3 +6,9 @@ export interface RegisterUserData
     password: string,
     confirmPassword: string
 }
+
+export interface LoginUserData 
+{
+    email: string,
+    password: string
+}

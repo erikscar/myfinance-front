@@ -3,6 +3,8 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validatio
 import { Access } from '../../services/access';
 import { Router, RouterLink } from '@angular/router';
 import { IonIcon } from "@ionic/angular/standalone";
+import { HttpErrorResponse } from '@angular/common/http';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',  
@@ -14,6 +16,8 @@ import { IonIcon } from "@ionic/angular/standalone";
 export class Login {
   accessService: Access = inject(Access);
   router: Router = inject(Router);
+  toastService: ToastrService = inject(ToastrService);
+  
   showPassword: boolean = false;
   passwordIcon: string = "eye-off-outline";
   
@@ -23,10 +27,15 @@ export class Login {
   });
 
   async loginUser() {
-    await this.accessService.loginUser(this.loginForm.value)
-    this.loginForm.reset;
-
-    this.router.navigateByUrl("/home");
+    this.accessService.loginUser(this.loginForm.value).subscribe({
+      next: () => {
+        this.loginForm.reset;
+        this.router.navigateByUrl("/home");
+      },
+      error: (httpErrorResponse: HttpErrorResponse) => {
+        this.toastService.error(httpErrorResponse.error);
+      }
+    })
   }
 
   changePasswordDisplay() {

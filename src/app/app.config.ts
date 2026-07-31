@@ -12,9 +12,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideToastr({
       preventDuplicates: true,
-      toastComponent: CustomToast,
-      timeOut: 9999999,
-      toastClass: '',
+      timeOut: 3000,
+      toastClass: 'ngx-toastr',
     }),
     provideIonicAngular({}),
   ],

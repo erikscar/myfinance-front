@@ -8,10 +8,9 @@ import { firstValueFrom } from 'rxjs';
 })
 export class User {
   public readonly http = inject(HttpClient);
-  url: string = environment.apiUrl;
+  url: string = environment.apiUrl + "User";
 
-  async getUsers()
-  {
-    return firstValueFrom(this.http.get(this.url + "users", {withCredentials: true}));
+  async getUsers() {
+    return firstValueFrom(this.http.get(this.url + "/users", {withCredentials: true}));
   }
 }
